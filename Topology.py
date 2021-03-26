@@ -21,7 +21,8 @@ def parse(tfpath):
             properties = dict()
             # properties['name'] = node.get_property_value('name')
             name = node.get_property_value('name')
-            properties['Position'] = (node.get_property_value('boundary')['x'], node.get_property_value('boundary')['y'])
+            properties['Position'] = (node.get_property_value('boundary')['x'],
+                                      node.get_property_value('boundary')['y'])
             for pg in node.get_property_value('property_groups'):
                 if pg['name'] == 'System Identification':  # Identification作为Device属性
                     for prop in pg['group']:
