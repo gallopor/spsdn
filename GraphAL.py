@@ -1,3 +1,6 @@
+import yaml
+
+
 class Vertex:
     def __init__(self, name, properties=None):
         self._name = name
@@ -17,12 +20,18 @@ class Vertex:
         '''
         返回该节点所有邻居节点排序后的名称列表
         '''
-        return sorted(list(self._neighbors.keys()))
+        return sorted(self._neighbors.keys())
+
+    def get_neighbors(self):
+        '''
+        返回该节点所有邻居节点及其权重
+        '''
+        return self._neighbors
 
     def __repr__(self):
         return str(self.name)
 
-    def add_neighbor(self, vertex, weight=0):
+    def add_neighbor(self, vertex, weight=1):
         '''
         添加邻居节点
         :param vertex: 邻居节点
@@ -49,39 +58,97 @@ class Vertex:
 # 采用邻接表存储图
 class GraphAL:
     def __init__(self):
-        self.vertices = dict()
+        self._vertices = dict()
+
+    @property
+    def vertices(self):
+        return sorted(self._vertices)
 
     def add_vertex(self, vertex):
         if isinstance(vertex, Vertex):
-            if vertex.name not in self.vertices.keys():
-                self.vertices[vertex.name] = vertex
+            if vertex.name not in self._vertices:
+                self._vertices[vertex.name] = vertex
             else:
                 print('Vertex: name=%s, already exists' % vertex.name)
-        return list(self.vertices.keys()).sort()
 
     def get_vertex(self, name):
-        if name in self.vertices:
-            return self.vertices[name]
+        if name in self._vertices:
+            return self._vertices[name]
 
-    def add_edge(self, src, dst, weight=0):
-        if src in self.vertices and dst in self.vertices:
-            self.vertices[src].add_neighbor(self.vertices[dst], weight)
+    def add_edge(self, src, dst, weight=1):
+        if src in self._vertices and dst in self._vertices:
+            self._vertices[src].add_neighbor(self._vertices[dst], weight)
 
     def __contains__(self, name):
-        return name in self.vertices
+        return name in self._vertices
 
-    # 迭代显示邻接表的每个顶点的邻居节点
+    # 迭代显示邻接表的每个顶点
     def __iter__(self):
-        return iter(self.vertices.values())
+        return iter(self._vertices.values())
 
     def __repr__(self):
-        graph = ''
-        for name in self.vertices:
-            graph = graph + str(self.vertices[name]) + ' - '
-            for x in self.vertices[name].neighbors:
-                graph = graph + str(self.vertices[x]) + ', '
-            graph = graph.rstrip(', ') + '\n'
-        return graph
+        graph = dict()
+        for name in sorted(self._vertices):
+            graph[name] = self.get_vertex(name).get_neighbors()
+        return yaml.dump(graph, indent=4)
+
+    def bfs(self, src, func=None):
+        visited = list()
+        queue = list()
+        queue.append(src)
+        visited.append(src)
+        while queue:
+            cur = queue.pop(0)
+            if func:
+                try:
+                    func(cur)
+                except Exception:
+                    print('Failed to call the function %s!' % func)
+            else:
+                print(cur, end=' ')
+
+            for node in self.get_vertex(cur).neighbors:
+                if node not in visited:
+                    queue.append(node)
+                    visited.append(node)
+
+    def find_path(self, src, dst, path=[]):
+        path = path + [src]
+        if src == dst:
+            return path
+        for node in self._vertices[src].neighbors:
+            if node not in path:
+                new_path = self.find_path(node, dst, path)
+                if new_path:
+                    return new_path
+        return None
+
+    def find_all_path(self, src, dst, path=[]):
+        path = path + [src]
+        if src == dst:
+            return [path]
+
+        paths = []  # 存储所有路径
+        for node in self._vertices[src].neighbors:
+            if node not in path:
+                new_paths = self.find_all_path(node, dst, path)
+                for np in new_paths:
+                    paths.append(np)
+        return paths
+
+    def find_shortest_path(self, src, dst, path=[]):
+        path = path + [src]
+        if src == dst:
+            return path
+
+        shortest_path = []
+        for node in self._vertices[src].neighbors:
+            if node not in path:
+                new_path = self.find_shortest_path(node, dst, path)
+                if new_path:
+                    if not shortest_path or len(new_path) < len(shortest_path):
+                        shortest_path = new_path
+        return shortest_path
 
 
 if __name__ == '__main__':
@@ -106,3 +173,5 @@ if __name__ == '__main__':
     for v in g:
         for w in v.neighbors:
             print("(%s, %s, %s)" % (v.name, w, v.get_weight(w)))
+
+    # g.bfs(0)
