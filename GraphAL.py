@@ -5,7 +5,7 @@ class Vertex:
     def __init__(self, name, properties=None):
         self._name = name
         self._properties = properties  # 节点属性(dict)
-        self._neighbors = dict()       # 相邻节点
+        self._neighbors = dict()       # 相邻节点{neighbor: weight}
 
     @property
     def name(self):
@@ -21,12 +21,6 @@ class Vertex:
         返回该节点所有邻居节点排序后的名称列表
         '''
         return sorted(self._neighbors.keys())
-
-    def get_neighbors(self):
-        '''
-        返回该节点所有邻居节点及其权重
-        '''
-        return self._neighbors
 
     def __repr__(self):
         return str(self.name)
@@ -48,8 +42,16 @@ class Vertex:
                 self._neighbors[vertex.name] = weight
                 vertex._neighbors[self.name] = weight
 
-    def get_weight(self, nbr_name):
-        return self._neighbors[nbr_name]
+    def get_weight(self, nbr=None):
+        '''
+        返回该节点到邻居节点的权重
+        :param nbr: 邻居节点名称, 如果为None, 则返回全部邻居节点及其权重
+        '''
+        if nbr is not None:
+            if nbr in self.neighbors:
+                return self._neighbors[nbr]
+        else:
+            return self._neighbors
 
     def set_properties(self, properties):
         self.properties = self.properties + properties
@@ -62,7 +64,10 @@ class GraphAL:
 
     @property
     def vertices(self):
-        return sorted(self._vertices)
+        '''
+        返回图中所有节点排序后的名称列表
+        '''
+        return sorted(self._vertices.keys())
 
     def add_vertex(self, vertex):
         if isinstance(vertex, Vertex):
@@ -88,8 +93,8 @@ class GraphAL:
 
     def __repr__(self):
         graph = dict()
-        for name in sorted(self._vertices):
-            graph[name] = self.get_vertex(name).get_neighbors()
+        for name in sorted(self.vertices):
+            graph[name] = self.get_vertex(name).get_weight()
         return yaml.dump(graph, indent=4)
 
     def bfs(self, src, func=None):
@@ -99,7 +104,7 @@ class GraphAL:
         visited.append(src)
         while queue:
             cur = queue.pop(0)
-            if func:
+            if func is not None:
                 try:
                     func(cur)
                 except Exception:

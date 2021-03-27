@@ -53,8 +53,8 @@ def parse(tfpath):
     return topo
 
 
-topo = parse(tfpath)
-print(topo)
+# topo = parse(tfpath)
+# print(topo)
 
-paths = topo.find_all_path('IsisRouter00', 'IsisRouter09')
-print(paths)
+# paths = topo.find_all_path('IsisRouter00', 'IsisRouter09')
+# print(paths)
