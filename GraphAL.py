@@ -84,6 +84,19 @@ class GraphAL:
         if src in self._vertices and dst in self._vertices:
             self._vertices[src].add_neighbor(self._vertices[dst], weight)
 
+    def get_edges(self, unidirectional=True):
+        edges = list()
+        nodes = list()
+        for vn in self.vertices:
+            nodes.append(vn)
+            for nbr in self.get_vertex(vn).neighbors:
+                if unidirectional:
+                    if nbr not in nodes:
+                        edges.append([vn, nbr])
+                else:
+                    edges.append([vn, nbr])
+        return edges
+
     def __contains__(self, name):
         return name in self._vertices
 
@@ -117,11 +130,21 @@ class GraphAL:
                     queue.append(node)
                     visited.append(node)
 
+    def dfs(self, src, visited=None):
+        if visited is None:
+            visited = set()
+        visited.add(src)
+        print(src, end=' ')
+
+        for next in set(self.get_vertex(src).neighbors) - visited:
+            self.dfs(next, visited)
+        return visited
+
     def find_path(self, src, dst, path=[]):
         path = path + [src]
         if src == dst:
             return path
-        for node in self._vertices[src].neighbors:
+        for node in self._vertices(src).neighbors:
             if node not in path:
                 new_path = self.find_path(node, dst, path)
                 if new_path:
@@ -173,10 +196,12 @@ if __name__ == '__main__':
     g.add_edge(5, 4, 8)
     g.add_edge(5, 2, 1)
 
-    print(g)
+    # print(g)
 
-    for v in g:
-        for w in v.neighbors:
-            print("(%s, %s, %s)" % (v.name, w, v.get_weight(w)))
+    # for v in g:
+    #     for w in v.neighbors:
+    #         print("(%s, %s, %s)" % (v.name, w, v.get_weight(w)))
 
     # g.bfs(0)
+    # g.dfs(0)
+    print(g.get_edges())
