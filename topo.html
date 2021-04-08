@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+
+</head>
+<body>
+    <div id="ebec3ab2c6fd4fab84d114542681ff3a" class="chart-container" style="width:900px; height:500px;"></div>
+    <script>
+        var chart_ebec3ab2c6fd4fab84d114542681ff3a = echarts.init(
+            document.getElementById('ebec3ab2c6fd4fab84d114542681ff3a'), 'white', {renderer: 'canvas'});
+        var option_ebec3ab2c6fd4fab84d114542681ff3a = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "graph",
+            "layout": "none",
+            "symbolSize": 10,
+            "circular": {
+                "rotateLabel": false
+            },
+            "force": {
+                "repulsion": 50,
+                "edgeLength": 50,
+                "gravity": 0.2
+            },
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            },
+            "lineStyle": {
+                "show": true,
+                "width": 1,
+                "opacity": 1,
+                "curveness": 0,
+                "type": "solid"
+            },
+            "roam": true,
+            "draggable": false,
+            "focusNodeAdjacency": true,
+            "data": [
+                {
+                    "name": "IsisRouter00",
+                    "x": 200,
+                    "y": 92,
+                    "fixed": false,
+                    "symbol": "image://./pic/router_blue.png",
+                    "symbolSize": 50
+                },
+                {
+                    "name": "IsisRouter04",
+                    "x": 489,
+                    "y": 306,
+                    "fixed": false,
+                    "symbol": "image://./pic/router_blue.png",
+                    "symbolSize": 50
+                },
+                {
+                    "name": "IsisRouter03",
+                    "x": 939,
+                    "y": 92,
+                    "fixed": false,
+                    "symbol": "image://./pic/router_blue.png",
+                    "symbolSize": 50
+                },
+                {
+                    "name": "IsisRouter01",
+                    "x": 489,
+                    "y": 92,
+                    "fixed": false,
+                    "symbol": "image://./pic/router_blue.png",
+                    "symbolSize": 50
+                },
+                {
+                    "name": "IsisRouter09",
+                    "x": 939,
+                    "y": 514,
+                    "fixed": false,
+                    "symbol": "image://./pic/router_blue.png",
+                    "symbolSize": 50
+                },
+                {
+                    "name": "IsisRouter07",
+                    "x": 489,
+                    "y": 514,
+                    "fixed": false,
+                    "symbol": "image://./pic/router_blue.png",
+                    "symbolSize": 50
+                },
+                {
+                    "name": "IsisRouter08",
+                    "x": 719,
+                    "y": 514,
+                    "fixed": false,
+                    "symbol": "image://./pic/router_blue.png",
+                    "symbolSize": 50
+                },
+                {
+                    "name": "IsisRouter05",
+                    "x": 719,
+                    "y": 306,
+                    "fixed": false,
+                    "symbol": "image://./pic/router_blue.png",
+                    "symbolSize": 50
+                },
+                {
+                    "name": "IsisRouter02",
+                    "x": 719,
+                    "y": 92,
+                    "fixed": false,
+                    "symbol": "image://./pic/router_blue.png",
+                    "symbolSize": 50
+                },
+                {
+                    "name": "IsisRouter06",
+                    "x": 939,
+                    "y": 306,
+                    "fixed": false,
+                    "symbol": "image://./pic/router_blue.png",
+                    "symbolSize": 50
+                }
+            ],
+            "edgeLabel": {
+                "show": false,
+                "position": "top",
+                "margin": 8
+            },
+            "edgeSymbol": [
+                null,
+                null
+            ],
+            "edgeSymbolSize": 10,
+            "links": [
+                {
+                    "source": "IsisRouter00",
+                    "target": "IsisRouter01",
+                    "lineStyle": {
+                        "show": true,
+                        "width": 3,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid",
+                        "color": "red"
+                    }
+                },
+                {
+                    "source": "IsisRouter01",
+                    "target": "IsisRouter02",
+                    "lineStyle": {
+                        "show": true,
+                        "width": 3,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid",
+                        "color": "red"
+                    }
+                },
+                {
+                    "source": "IsisRouter01",
+                    "target": "IsisRouter04"
+                },
+                {
+                    "source": "IsisRouter02",
+                    "target": "IsisRouter03",
+                    "lineStyle": {
+                        "show": true,
+                        "width": 3,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid",
+                        "color": "red"
+                    }
+                },
+                {
+                    "source": "IsisRouter02",
+                    "target": "IsisRouter05"
+                },
+                {
+                    "source": "IsisRouter03",
+                    "target": "IsisRouter06",
+                    "lineStyle": {
+                        "show": true,
+                        "width": 3,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid",
+                        "color": "red"
+                    }
+                },
+                {
+                    "source": "IsisRouter04",
+                    "target": "IsisRouter05"
+                },
+                {
+                    "source": "IsisRouter04",
+                    "target": "IsisRouter07"
+                },
+                {
+                    "source": "IsisRouter05",
+                    "target": "IsisRouter06"
+                },
+                {
+                    "source": "IsisRouter05",
+                    "target": "IsisRouter08"
+                },
+                {
+                    "source": "IsisRouter06",
+                    "target": "IsisRouter09",
+                    "lineStyle": {
+                        "show": true,
+                        "width": 3,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid",
+                        "color": "red"
+                    }
+                },
+                {
+                    "source": "IsisRouter07",
+                    "target": "IsisRouter08"
+                },
+                {
+                    "source": "IsisRouter08",
+                    "target": "IsisRouter09"
+                }
+            ]
+        }
+    ],
+    "legend": [
+        {
+            "data": [],
+            "selected": {}
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    }
+};
+        chart_ebec3ab2c6fd4fab84d114542681ff3a.setOption(option_ebec3ab2c6fd4fab84d114542681ff3a);
+    </script>
+</body>
+</html>
